@@ -27,7 +27,7 @@ If you have added your own CSS to the CMS, then you can of course use custom CSS
 ```php
 <?php
 
-use Axllent\CMSFormFields;
+use Axllent\CMSFormFields\NoticeField;
 
 class MyPage extends Page
 {
@@ -51,6 +51,7 @@ class MyPage extends Page
             'Content'
         );
 
+        return $fields;
     }
 }
 ```

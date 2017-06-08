@@ -2,14 +2,13 @@
 
 An extension that adds custom form field types to the SilverStripe 4 CMS.
 
-Currently there is only one, however more will be added.
-
 
 ## Form Field Types
 
 See docs for more information.
 
 - [NoticeField](docs/en/NoticeField.md) - Add notices into the CMS. NoticeFields can be perisitent across all tabs and are dismissable.
+- [URLField](docs/en/URLField.md) - Easily add an validating input field for URLs.
 
 
 ## Requirements
