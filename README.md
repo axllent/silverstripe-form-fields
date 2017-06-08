@@ -1,4 +1,4 @@
-# Custom SilverStripe CMS Form Field Types
+# Custom SilverStripe CMS form fields
 
 An extension that adds custom form field types to the SilverStripe 4 CMS.
 

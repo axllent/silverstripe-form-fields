@@ -1,6 +1,6 @@
 {
 	"name": "axllent/silverstripe-cms-form-fields",
-	"description": "Custom CMS Form Field types",
+	"description": "Custom CMS form fields",
 	"type": "silverstripe-module",
 	"homepage": "https://github.com/axllent/silverstripe-cms-form-fields",
 	"keywords": [
