@@ -10,7 +10,7 @@
 * Authors: Techno Joy development team (www.technojoy.co.nz)
 */
 
-namespace Axllent\CMSFormFields;
+namespace Axllent\FormFields;
 
 use SilverStripe\Admin\LeftAndMainExtension;
 use SilverStripe\View\Requirements;

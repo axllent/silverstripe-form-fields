@@ -1,6 +1,6 @@
 <?php
 
-namespace Axllent\CMSFormFields;
+namespace Axllent\FormFields\Forms;
 
 use SilverStripe\Forms\LiteralField;
 

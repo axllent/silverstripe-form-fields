@@ -27,7 +27,7 @@ If you have added your own CSS to the CMS, then you can of course use custom CSS
 ```php
 <?php
 
-use Axllent\CMSFormFields\NoticeField;
+use Axllent\FormFields\Forms\NoticeField;
 
 class MyPage extends Page
 {
@@ -44,7 +44,7 @@ class MyPage extends Page
             NoticeField::create('Notice4','This is a warning notice', 'warning'),
         ]);
 
-        /* Non-persistent NoticeField (notice the 4th parameter `false`) */
+        /* Non-persistent NoticeField (note the 4th parameter `false`) */
         $fields->addFieldToTab(
             'Root.Main',
             NoticeField::create('Notice5','You must enter content', 'warning', false),

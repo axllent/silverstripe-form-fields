@@ -1,14 +1,22 @@
-# Custom SilverStripe CMS form fields
+# Custom SilverStripe forms & fields
 
-An extension that adds custom form field types to the SilverStripe 4 CMS.
+An extension that adds custom form fields & types to the SilverStripe 4.
 
 
-## Form Field Types
+## Form Types
 
 See docs for more information.
 
-- [NoticeField](docs/en/NoticeField.md) - Add notices into the CMS. NoticeFields can be perisitent across all tabs and are dismissable.
+- [NoticeField](docs/en/NoticeField.md) - Add notices into the CMS. NoticeFields can be persistent across all tabs and are dismissable.
 - [URLField](docs/en/URLField.md) - Easily add an validating input field for URLs.
+
+
+## Field Types
+
+See docs for more information.
+
+- [URL](docs/en/URL.md) - Encode urls properly in templates.
+- [Blob](docs/en/Blob.md) - Adds blob field type to the framework.
 
 
 ## Requirements
@@ -21,5 +29,5 @@ See docs for more information.
 You can install it via composer:
 
 ```
-composer require axllent/silverstripe-cms-form-fields
+composer require axllent/silverstripe-form-fields
 ```

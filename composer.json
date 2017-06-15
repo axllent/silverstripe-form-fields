@@ -1,11 +1,12 @@
 {
-	"name": "axllent/silverstripe-cms-form-fields",
-	"description": "Custom CMS form fields",
+	"name": "axllent/silverstripe-form-fields",
+	"description": "Custom form fields for use in the framework & CMS",
 	"type": "silverstripe-module",
-	"homepage": "https://github.com/axllent/silverstripe-cms-form-fields",
+	"homepage": "https://github.com/axllent/silverstripe-form-fields",
 	"keywords": [
 		"silverstripe",
 		"cms",
+		"framework",
         "forms"
 	],
 	"license": "The MIT License (MIT)",
@@ -16,14 +17,14 @@
 		}
 	],
 	"support": {
-		"issues": "https://github.com/axllent/silverstripe-cms-form-fields/issues"
+		"issues": "https://github.com/axllent/silverstripe-form-fields/issues"
 	},
     "require": {
-		"silverstripe/cms": "^4.0@dev"
+		"silverstripe/framework": "^4.0@dev"
 	},
     "autoload": {
         "psr-4": {
-            "Axllent\\CMSFormFields\\": "src/"
+            "Axllent\\FormFields\\": "src/"
         }
     }
 }

@@ -1,9 +1,7 @@
 # URLField
 
-URLField provides an easy way to add a self-validating text input for URLs.
+URLField provides an easy way to add a validating text input for URLs.
 It includes a placeholder with `http://www.exmaple.com` to indicate a full URL is required.
-
-
 
 ![URLField](img/URLField.png "URLField Example")
 
@@ -12,7 +10,7 @@ It includes a placeholder with `http://www.exmaple.com` to indicate a full URL i
 ```php
 <?php
 
-use Axllent\CMSFormFields\URLField;
+use Axllent\FormFields\URLField;
 
 class MyPage extends Page
 {
