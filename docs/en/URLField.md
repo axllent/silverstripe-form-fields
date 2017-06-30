@@ -5,7 +5,7 @@ It includes a placeholder with `http://www.exmaple.com` to indicate a full URL i
 
 ![URLField](img/URLField.png "URLField Example")
 
-## Inserting a NoticeField
+## Usage
 
 ```php
 <?php
