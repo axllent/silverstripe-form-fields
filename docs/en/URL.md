@@ -15,11 +15,10 @@ It works nicely in conjunction with the [URLField](URLField.md) Form field (show
 ## Usage
 ```php
 <?php
-use SilverStripe\ORM\DataObject;
 use Axllent\FormFields\FieldType\URL;
 use Axllent\FormFields\FormFields\URLField;
 
-class MyObject extends DataObject
+class MyPage extends Page
 {
     private static $db = array(
         'Website' => URL::class
