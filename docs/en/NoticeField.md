@@ -22,7 +22,7 @@ If you have added your own CSS to the CMS, then you can of course use custom CSS
 
 ![NoticeField](img/NoticeField.png "NoticeField Example")
 
-## Inserting a NoticeField
+## Usage
 
 ```php
 <?php
