@@ -21,15 +21,22 @@ class URLField extends TextField
 
     public function validate($validator)
     {
-        $this->value = trim($this->value);
+        // Don't validate empty fields
+        if (empty($this->value)) {
+            return true;
+        }
 
-        if ($this->value && !filter_var($this->value, FILTER_VALIDATE_URL)) {
-            $validator->validationError(
-                $this->name,
-                'Please enter a valid URL including the http://',
-                'validation'
-            );
-            return false;
+        if (!filter_var($this->value, FILTER_VALIDATE_URL)) {
+            if (filter_var('http://' . $this->value, FILTER_VALIDATE_URL)) {
+                $this->value = 'http://' . $this->value;
+            } else {
+                $validator->validationError(
+                    $this->name,
+                    'Please enter a valid URL including the http://',
+                    'validation'
+                );
+                return false;
+            }
         }
 
         return true;
