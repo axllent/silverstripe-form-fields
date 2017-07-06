@@ -22,6 +22,9 @@
     "require": {
 		"silverstripe/framework": "^4.0@dev"
 	},
+    "suggest": {
+        "guzzlehttp/guzzle": "optional: if you require VideoLink titles or Vimeo thumbnail images"
+    },
     "autoload": {
         "psr-4": {
             "Axllent\\FormFields\\": "src/"
