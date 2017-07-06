@@ -5,8 +5,8 @@ Notable changes to this project will be documented in this file.
 ## [1.2.0]
 
 - Append "http://" to non-validating URLs and re-validate.
-- `VideoLink` field type
-- `VideoLinkField`
+- `VideoLink` field type, iframe generation, thumbnails
+- `VideoLinkField` - CMS integration
 
 
 ## [1.1.0]
