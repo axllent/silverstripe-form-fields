@@ -1,0 +1,8 @@
+---
+Name: videoimgcache
+---
+SilverStripe\Core\Injector\Injector:
+  Psr\SimpleCache\CacheInterface.videoImgCache:
+    factory: SilverStripe\Core\Cache\CacheFactory
+    constructor:
+      namespace: 'videoimgcache'
