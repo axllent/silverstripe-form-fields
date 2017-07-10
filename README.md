@@ -18,7 +18,7 @@ See docs for more information.
 
 - [URL](docs/en/URL.md) - Encode urls properly in templates.
 - [Blob](docs/en/Blob.md) - Adds blob field type to the framework.
-- [VideoLink](docs/en/Blob.md) - Video link field (YouTube/Vimeo supported) for easy template integration.
+- [VideoLink](docs/en/VideoLink.md) - Video link field (YouTube/Vimeo supported) for easy template integration.
 
 
 ## Requirements
