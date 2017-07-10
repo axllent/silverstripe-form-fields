@@ -9,7 +9,7 @@ including an optional preview in the CMS if created with `->showPreview(<max_wid
 <?php
 
 use Axllent\FormFields\FieldType\VideoLink;
-use Axllent\FormFields\VideoLinkField;
+use Axllent\FormFields\Forms\VideoLinkField;
 
 class MyPage extends Page
 {
