@@ -2,6 +2,12 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.2.1]
+
+- Update documentation
+- Don't exclude docs folder with a `composer require`
+
+
 ## [1.2.0]
 
 - Append "http://" to non-validating URLs and re-validate.
