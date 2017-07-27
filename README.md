@@ -13,11 +13,11 @@ See docs for more information.
 - [VideoLinkField](docs/en/VideoLinkField.md) - Easy embedding of YouTube & Vimeo video fields in the CMS.
 
 
-## Field Types
+## Object Types
 
 See docs for more information.
 
-- [PhoneNumber](docs/en/URL.md) - Phone number with `Link()` support.
+- [PhoneNumber](docs/en/PhoneNumber.md) - Phone number with `Link()` support.
 - [URL](docs/en/URL.md) - Encode urls properly in templates.
 - [Blob](docs/en/Blob.md) - Adds blob field type to the framework.
 - [VideoLink](docs/en/VideoLink.md) - Video link field (YouTube/Vimeo supported) for easy template integration.
