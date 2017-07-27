@@ -2,6 +2,11 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.2.2]
+
+- PhoneNumber
+- PhoneNumberField
+
 ## [1.2.1]
 
 - Update documentation
