@@ -208,7 +208,7 @@ class VideoLink extends URL
                     );
                 }
             }
-        } elseif (preg_match('/https?:\/\/youtu\.be\/([a-z0-9\_]+)/i', $value, $matches)) {
+        } elseif (preg_match('/https?:\/\/youtu\.be\/([a-z0-9\_\-]+)/i', $value, $matches)) {
             $output = [
                 'VideoID' => $matches[1],
                 'VideoService' => 'YouTube'
@@ -216,7 +216,7 @@ class VideoLink extends URL
         } elseif (preg_match('/youtu\.?be/i', $value)) {
             $query_string = array();
             parse_str(parse_url($value, PHP_URL_QUERY), $query_string);
-            if (isset($query_string['v'])) {
+            if (!empty($query_string['v'])) {
                 $output = [
                     'VideoID' => $query_string['v'],
                     'VideoService' => 'YouTube'
