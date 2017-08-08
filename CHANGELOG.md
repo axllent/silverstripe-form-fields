@@ -2,10 +2,16 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.2.3]
+
+- Better support for youtu.be links
+
+
 ## [1.2.2]
 
 - PhoneNumber
 - PhoneNumberField
+
 
 ## [1.2.1]
 
