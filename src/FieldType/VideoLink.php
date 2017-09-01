@@ -41,14 +41,14 @@ class VideoLink extends URL
         if ($this->Service == 'Vimeo') {
             $url = 'https://player.vimeo.com/video/' . $this->VideoID;
             if ($params && !empty($params[strtolower($this->Service)])) {
-                $url .= '?' . http_build_query($params[strtolower($this->Service)], '', '&amp;');
+                $url .= '?' . http_build_query($params[strtolower($this->Service)], '', '&');
             }
             return $url;
         }
         if ($this->Service == 'YouTube') {
             $url = 'https://www.youtube.com/embed/' . $this->VideoID;
             if ($params && !empty($params[strtolower($this->Service)])) {
-                $url .= '?' . http_build_query($params[strtolower($this->Service)], '', '&amp;');
+                $url .= '?' . http_build_query($params[strtolower($this->Service)], '', '&');
             }
             return $url;
         }
