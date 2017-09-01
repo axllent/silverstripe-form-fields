@@ -4,7 +4,7 @@ Notable changes to this project will be documented in this file.
 
 ## [1.2.4]
 
-- Fix html parsing bug in iFrame URL
+- Fix html bug in iFrame URL
 
 
 ## [1.2.3]
