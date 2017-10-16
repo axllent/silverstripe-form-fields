@@ -1,27 +1,27 @@
 .noticefield {
-    position: relative;
+	position: relative;
 }
 
 .noticefield .noticefield-close {
-    display: block;
-    float: right;
-    margin-left: 15px;
-    cursor: pointer;
-    opacity: 0.5;
+	display: block;
+	float: right;
+	margin-left: 15px;
+	cursor: pointer;
+	opacity: 0.5;
 }
 
 .noticefield .noticefield-close:hover {
-    opacity: 1;
+	opacity: 1;
 }
 
 .noticefield .noticefield-close::before {
-    content: "Q";
-    font-size: 18px;
-    font-family: silverstripe !important;
-    font-style: normal !important;
-    font-weight: 400 !important;
-    font-variant: normal !important;
-    text-transform: none !important;
-    speak: none;
-    line-height: 1;
+	content: "Q";
+	font-size: 18px;
+	font-family: silverstripe !important;
+	font-style: normal !important;
+	font-weight: 400 !important;
+	font-variant: normal !important;
+	text-transform: none !important;
+	speak: none;
+	line-height: 1;
 }
