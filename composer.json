@@ -20,7 +20,7 @@
 		"issues": "https://github.com/axllent/silverstripe-form-fields/issues"
 	},
     "require": {
-		"silverstripe/framework": "^4.0@dev"
+		"silverstripe/framework": "^4.0"
 	},
     "suggest": {
         "guzzlehttp/guzzle": "optional: if you require VideoLink titles or Vimeo thumbnail images"
