@@ -2,6 +2,11 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.2.5]
+
+- Move templates to correct position
+
+
 ## [1.2.4]
 
 - Fix html bug in iFrame URL
