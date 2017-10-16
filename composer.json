@@ -1,7 +1,7 @@
 {
 	"name": "axllent/silverstripe-form-fields",
 	"description": "Custom forms & fields for the SilverStripe framework & CMS",
-	"type": "silverstripe-module",
+	"type": "silverstripe-vendormodule",
 	"homepage": "https://github.com/axllent/silverstripe-form-fields",
 	"keywords": [
 		"silverstripe",
@@ -20,8 +20,15 @@
 		"issues": "https://github.com/axllent/silverstripe-form-fields/issues"
 	},
     "require": {
+        "silverstripe/vendor-plugin": "^1.0",
 		"silverstripe/framework": "^4.0"
 	},
+    "extra": {
+        "expose": [
+            "css",
+            "javascript"
+        ]
+    },
     "suggest": {
         "guzzlehttp/guzzle": "optional: if you require VideoLink titles or Vimeo thumbnail images"
     },

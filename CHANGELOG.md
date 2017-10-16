@@ -5,6 +5,8 @@ Notable changes to this project will be documented in this file.
 ## [1.2.5]
 
 - Move templates to correct position
+- Switch to silverstripe-vendormodule
+- Use tabs for CSS/JS/SS
 
 
 ## [1.2.4]

@@ -21,12 +21,7 @@ class CMSFormFieldsExt extends LeftAndMainExtension
     public function init()
     {
         parent::init();
-        Requirements::css($this->ModuleBase() . '/css/cms-form-fields.css');
-		Requirements::javascript($this->ModuleBase() . '/javascript/cms-form-fields.js');
-    }
-
-    private function ModuleBase()
-    {
-        return basename(dirname(dirname(dirname(__FILE__))));
+        Requirements::css('axllent/silverstripe-form-fields: css/cms-form-fields.css');
+		Requirements::javascript('axllent/silverstripe-form-fields: javascript/cms-form-fields.js');
     }
 }
