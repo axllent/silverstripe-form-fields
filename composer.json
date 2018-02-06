@@ -9,7 +9,7 @@
 		"framework",
         "forms"
 	],
-	"license": "The MIT License (MIT)",
+	"license": "MIT",
 	"authors": [
 		{
 			"name": "Ralph Slooten",
