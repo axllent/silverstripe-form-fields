@@ -15,7 +15,7 @@ class VideoLinkField extends URLField
     {
         $attributes = array(
             'class' => 'text',
-            'placeholder' => 'Enter a valid YouTube or Vimeo link'
+            'placeholder' => _t(__CLASS__ .'.Placeholder', 'Enter a valid YouTube or Vimeo link')
         );
 
         return array_merge(
@@ -64,7 +64,7 @@ class VideoLinkField extends URLField
         if (!$obj->getService()) {
             $validator->validationError(
                 $this->name,
-                'Please enter a valid YouTube or Vimeo link',
+                _t(__CLASS__ . '.ValidationError', 'Please enter a valid YouTube or Vimeo link'),
                 'validation'
             );
             return false;

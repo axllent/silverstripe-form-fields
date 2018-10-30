@@ -32,7 +32,7 @@ class URLField extends TextField
             } else {
                 $validator->validationError(
                     $this->name,
-                    'Please enter a valid URL including the http://',
+                    _t(__CLASS__ . '.ValidationError', 'Please enter a valid URL including the http:// or https://'),
                     'validation'
                 );
                 return false;

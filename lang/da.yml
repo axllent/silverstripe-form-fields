@@ -1,0 +1,10 @@
+da:
+  Axllent\FormFields\Forms\PhoneNumberField:
+    Placeholder: 'Telefon links får automatisk +{prefix} tilføjet'
+    ValidationError: 'Venligst indtast korrekt telefonnummer'
+  Axllent\FormFields\Forms\URLField:
+    ValidationError: 'Venligst indtast en korrekt URL som inkluderer http:// eller https://'
+  Axllent\FormFields\Forms\VideoLinkField:
+    Placeholder: 'Indtast et korrekt YouTube eller Vimeo link'
+    ValidationError: 'Indtast et korrekt YouTube eller Vimeo link'
+    TemplateError: 'Hvis du ikke kan se din video foroven, så er din URL sandsynligvis forkert'

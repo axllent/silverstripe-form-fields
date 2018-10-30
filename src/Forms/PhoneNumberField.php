@@ -9,10 +9,11 @@ class PhoneNumberField extends TextField
 {
     public function getAttributes()
     {
-        $attributes = array(
+        $defaultPrefix = PhoneNumber::config()->get('default_country_code');
+        $attributes = [
             'class' => 'text',
-            'placeholder' => 'Phone number links will be prefixed with +64'
-        );
+            'placeholder' => _t(__CLASS__ . '.Placeholder', 'Phone number links will be prefixed with +{prefix}', ['prefix' => $defaultPrefix])
+        ];
 
         return array_merge(
             parent::getAttributes(),
@@ -34,7 +35,7 @@ class PhoneNumberField extends TextField
         if (!$phone->Link()) {
             $validator->validationError(
                 $this->name,
-                'Please enter a valid phone number',
+                _t(__CLASS__ . '.ValidationError', 'Please enter a valid phone number'),
                 'validation'
             );
             return false;
