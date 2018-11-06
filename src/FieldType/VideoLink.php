@@ -2,8 +2,8 @@
 
 namespace Axllent\FormFields\FieldType;
 
-use SilverStripe\Core\Injector\Injector;
 use Psr\SimpleCache\CacheInterface;
+use SilverStripe\Core\Injector\Injector;
 
 /**
  * VideoLink - oEmbeded Video
@@ -17,18 +17,35 @@ class VideoLink extends URL
      */
     private static $cache_seconds = 604800; // 7 days
 
-    private static $casting = array(
-        'Initial' => 'Text',
-        'URL' => 'HTMLText',
-        'iFrameURL' => 'HTMLFragment',
-        'ThumbnailURL' => 'HTMLFragment'
-    );
+    /**
+     * Ensures that the methods are wrapped in the correct type and
+     * values are safely escaped while rendering in the template.
+     * @var array
+     */
+    private static $casting = [
+        'Initial'      => 'Text',
+        'URL'          => 'HTMLText',
+        'iFrameURL'    => 'HTMLFragment',
+        'ThumbnailURL' => 'HTMLFragment',
+    ];
 
+    /**
+     * Return the raw URL
+     *
+     * @param  Null
+     * @return String
+     */
     public function URL()
     {
         return $this->RAW();
     }
 
+    /**
+     * Return the iframe URL
+     *
+     * @param  Null
+     * @return String
+     */
     public function getIframeURL()
     {
         $info = $this->parseLink();
@@ -54,7 +71,14 @@ class VideoLink extends URL
         }
     }
 
-    public function Iframe($maxwidth = '100%', $height = '56%')
+    /**
+     * Return populated iframe template
+     *
+     * @param  Varchar max width
+     * @param  Varchar height in proportion
+     * @return String
+     */
+    public function iFrame($maxwidth = '100%', $height = '56%')
     {
         $url = $this->getIFrameURL();
         if (!$url) {
@@ -67,18 +91,30 @@ class VideoLink extends URL
             $height .= 'px';
         }
         return $this->customise([
-            'URL' => $url,
+            'URL'      => $url,
             'MaxWidth' => $maxwidth,
-            'Height' => $height
+            'Height'   => $height,
         ])->renderWith('Axllent\\FormFields\\Layout\\VideoIframe');
     }
 
+    /**
+     * Return service based on URL
+     *
+     * @param  Null
+     * @return String YouTube|Vimeo|null
+     */
     public function getService()
     {
         $info = $this->parseLink();
         return $info ? $info['VideoService'] : false;
     }
 
+    /**
+     * Return video ID
+     *
+     * @param  Null
+     * @return String
+     */
     public function getVideoID()
     {
         $info = $this->parseLink();
@@ -87,7 +123,7 @@ class VideoLink extends URL
 
     /**
      * Scrape Video information from hosting sites
-     * @param NULL
+     * @param  Null
      * @return String
      */
     public function getTitle()
@@ -112,13 +148,21 @@ class VideoLink extends URL
         }
     }
 
-    public function ThumbnailURL($size = 'large')
+    /**
+     * Return thumbnail URL
+     *
+     * @param  Null
+     * @return String
+     */
+    public function thumbnailURL($size = 'large')
     {
         if (!in_array($size, ['large', 'medium', 'small'])) {
             return false;
         }
+
         $info = $this->parseLink();
         $service = $this->getService();
+
         if (!$info || !$service) {
             return false;
         }
@@ -138,9 +182,11 @@ class VideoLink extends URL
             $data = $this->getCachedJsonResponse(
                 'https://vimeo.com/api/v2/video/' . $this->VideoID . '.json'
             );
+
             if (!$data) {
                 return false;
             }
+
             if ($size == 'large' && (!empty($data[0]['thumbnail_large']))) {
                 return $data[0]['thumbnail_large'];
             } elseif ($size == 'medium' && (!empty($data[0]['thumbnail_medium']))) {
@@ -153,6 +199,12 @@ class VideoLink extends URL
         return false;
     }
 
+    /**
+     * Return cached json response
+     *
+     * @param  String url
+     * @return Array|null
+     */
     private function getCachedJsonResponse($url)
     {
         if (!class_exists('GuzzleHttp\Client')) {
@@ -170,11 +222,11 @@ class VideoLink extends URL
 
         if (!$json = $cache->get($key)) {
             $client = new \GuzzleHttp\Client([
-                'timeout'  => 5, // seconds
+                'timeout' => 5, // seconds
                 'headers' => [ // Appear like a web browser
-                    'User-Agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:51.0) Gecko/20100101 Firefox/51.0',
-                    'Accept-Language' => 'en-US,en;q=0.5'
-                ]
+                    'User-Agent'      => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:51.0) Gecko/20100101 Firefox/51.0',
+                    'Accept-Language' => 'en-US,en;q=0.5',
+                ],
             ]);
             try {
                 $res = $client->request('GET', $url);
@@ -189,6 +241,12 @@ class VideoLink extends URL
         return (!empty($data)) ? $data : false;
     }
 
+    /**
+     * Parse video link
+     *
+     * @param  Null
+     * @return Array|Null
+     */
     private function parseLink()
     {
         $value = $this->RAW();
@@ -199,27 +257,31 @@ class VideoLink extends URL
 
         $output = false;
 
-        if (preg_match('/(https?:\/\/)?(www\.)?(player\.)?vimeo\.com\/([a-z]*\/)*([0-9]{6,11})[?]?.*/i', $value, $matches)) {
+        if (preg_match(
+            '/(https?:\/\/)?(www\.)?(player\.)?vimeo\.com\/([a-z]*\/)*([0-9]{6,11})[?]?.*/i',
+            $value,
+            $matches
+        )) {
             foreach ($matches as $match) {
                 if (preg_match('/^[0-9]{6,12}$/', $match)) {
-                    $output = array(
-                        'VideoID' => $match,
-                        'VideoService' => 'Vimeo'
-                    );
+                    $output = [
+                        'VideoID'      => $match,
+                        'VideoService' => 'Vimeo',
+                    ];
                 }
             }
         } elseif (preg_match('/https?:\/\/youtu\.be\/([a-z0-9\_\-]+)/i', $value, $matches)) {
             $output = [
-                'VideoID' => $matches[1],
-                'VideoService' => 'YouTube'
+                'VideoID'      => $matches[1],
+                'VideoService' => 'YouTube',
             ];
         } elseif (preg_match('/youtu\.?be/i', $value)) {
-            $query_string = array();
+            $query_string = [];
             parse_str(parse_url($value, PHP_URL_QUERY), $query_string);
             if (!empty($query_string['v'])) {
                 $output = [
-                    'VideoID' => $query_string['v'],
-                    'VideoService' => 'YouTube'
+                    'VideoID'      => $query_string['v'],
+                    'VideoService' => 'YouTube',
                 ];
             }
         }

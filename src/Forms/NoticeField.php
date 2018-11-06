@@ -13,7 +13,7 @@ class NoticeField extends LiteralField
         $classes = [
             'noticefield',
             'message',
-            trim(htmlspecialchars($class))
+            trim(htmlspecialchars($class)),
         ];
         if ($all_tabs) {
             array_push($classes, 'persist');

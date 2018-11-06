@@ -11,17 +11,28 @@ use SilverStripe\ORM\FieldType\DBVarchar;
  */
 class URL extends DBVarchar
 {
-    private static $casting = array(
+    /**
+     * Ensures that the methods are wrapped in the correct type and
+     * values are safely escaped while rendering in the template.
+     * @var array
+     */
+    private static $casting = [
         'Initial' => 'Text',
-        'URL' => 'HTMLText',
-        'Scheme' => 'HTMLFragment',
-        'User' => 'HTMLFragment',
-        'Pass' => 'HTMLFragment',
-        'Host' => 'HTMLFragment',
-        'Path' => 'HTMLFragment',
-        'Query' => 'HTMLFragment'
-    );
+        'URL'     => 'HTMLText',
+        'Scheme'  => 'HTMLFragment',
+        'User'    => 'HTMLFragment',
+        'Pass'    => 'HTMLFragment',
+        'Host'    => 'HTMLFragment',
+        'Path'    => 'HTMLFragment',
+        'Query'   => 'HTMLFragment',
+    ];
 
+    /**
+     * Return constructed URL
+     *
+     * @param  Null
+     * @return String
+     */
     public function URL()
     {
         $p = $this->parse();
@@ -41,36 +52,72 @@ class URL extends DBVarchar
         return $link;
     }
 
+    /**
+     * Return the URL scheme (e.g. "http" or "https").
+     *
+     * @return string
+     */
     public function getScheme()
     {
         return $this->parse('scheme');
     }
 
+    /**
+     * Return the URL user.
+     *
+     * @return string
+     */
     public function getUser()
     {
         return $this->parse('user');
     }
 
+    /**
+     * Return the URL password.
+     *
+     * @return string
+     */
     public function getPass()
     {
         return $this->parse('pass');
     }
 
+    /**
+     * Return the URL host.
+     *
+     * @return string
+     */
     public function getHost()
     {
         return $this->parse('host');
     }
 
+    /**
+     * Return the URL path.
+     *
+     * @return string
+     */
     public function getPath()
     {
         return $this->parse('path');
     }
 
+    /**
+     * Return the URL query string.
+     *
+     * @return string eg: x=1&y=2
+     */
     public function getQuery()
     {
         return $this->parse('query');
     }
 
+    /**
+     * Parse the URL string.
+     *
+     * @param  Boolean optional component
+     * @return string eg: x=1&y=2
+     */
     public function parse($component = false)
     {
         $parts = parse_url($this->RAW());

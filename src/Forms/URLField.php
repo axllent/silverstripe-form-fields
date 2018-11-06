@@ -6,12 +6,18 @@ use SilverStripe\Forms\TextField;
 
 class URLField extends TextField
 {
+    /**
+     * Return field attributes
+     *
+     * @param  Null
+     * @return Array
+     */
     public function getAttributes()
     {
-        $attributes = array(
-            'class' => 'text',
-            'placeholder' => 'http://www.example.com'
-        );
+        $attributes = [
+            'class'       => 'text',
+            'placeholder' => 'http://www.example.com',
+        ];
 
         return array_merge(
             parent::getAttributes(),
@@ -19,6 +25,12 @@ class URLField extends TextField
         );
     }
 
+    /**
+     * Return validation result
+     *
+     * @param  Validator $validator
+     * @return Boolean
+     */
     public function validate($validator)
     {
         // Don't validate empty fields

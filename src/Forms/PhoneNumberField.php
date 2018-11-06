@@ -7,12 +7,22 @@ use SilverStripe\Forms\TextField;
 
 class PhoneNumberField extends TextField
 {
+    /**
+     * Return field attributes
+     *
+     * @param  Null
+     * @return Array
+     */
     public function getAttributes()
     {
         $defaultPrefix = PhoneNumber::config()->get('default_country_code');
         $attributes = [
-            'class' => 'text',
-            'placeholder' => _t(__CLASS__ . '.Placeholder', 'Phone number links will be prefixed with +{prefix}', ['prefix' => $defaultPrefix])
+            'class'       => 'text',
+            'placeholder' => _t(
+                __CLASS__ . '.Placeholder',
+                'Phone number links will be prefixed with +{prefix}',
+                ['prefix' => $defaultPrefix]
+            ),
         ];
 
         return array_merge(
@@ -21,6 +31,12 @@ class PhoneNumberField extends TextField
         );
     }
 
+    /**
+     * Return validation result
+     *
+     * @param  Validator $validator
+     * @return Boolean
+     */
     public function validate($validator)
     {
         // Don't validate empty fields
@@ -40,7 +56,6 @@ class PhoneNumberField extends TextField
             );
             return false;
         }
-
 
         return true;
     }

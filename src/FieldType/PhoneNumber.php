@@ -12,13 +12,18 @@ class PhoneNumber extends DBVarchar
      */
     private static $default_country_code = '64';
 
-    public function __construct($name = null, $size = 100, $options = array())
+    public function __construct($name = null, $size = 100, $options = [])
     {
         parent::__construct($name, $options);
         $this->size = $size ? $size : 100;
     }
 
-    public function Link()
+    /**
+     * Return a formatted href
+     *
+     * @return string The link to the number
+     */
+    public function link()
     {
         $tel = $this->parseNumber();
         return (!empty($tel['RFC3966'])) ? $tel['RFC3966'] : false;
@@ -34,7 +39,7 @@ class PhoneNumber extends DBVarchar
     public function parseNumber()
     {
         $tel = [
-            'Original' => $this->value
+            'Original' => $this->value,
         ];
 
         // remove brackets
@@ -42,9 +47,7 @@ class PhoneNumber extends DBVarchar
 
         // replace characters with space
         $str = trim(
-            preg_replace('/\s+/', ' ',
-                preg_replace('/[^a-z0-9\#\+]/i', ' ', strtolower($str))
-            )
+            preg_replace('/\s+/', ' ', preg_replace('/[^a-z0-9\#\+]/i', ' ', strtolower($str)))
         );
 
         // try detect if number starts with a + or international dialing code
@@ -85,5 +88,4 @@ class PhoneNumber extends DBVarchar
 
         return $tel;
     }
-
 }

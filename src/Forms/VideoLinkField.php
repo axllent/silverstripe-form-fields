@@ -7,16 +7,25 @@ use Axllent\FormFields\FieldType\VideoLink;
 class VideoLinkField extends URLField
 {
 
+    /**
+     * @defaults
+     */
     protected $display_video = false;
 
     protected $preview_height = false;
 
+    /**
+     * Return field attributes
+     *
+     * @param  Null
+     * @return Array
+     */
     public function getAttributes()
     {
-        $attributes = array(
-            'class' => 'text',
-            'placeholder' => _t(__CLASS__ .'.Placeholder', 'Enter a valid YouTube or Vimeo link')
-        );
+        $attributes = [
+            'class'       => 'text',
+            'placeholder' => _t(__CLASS__ . '.Placeholder', 'Enter a valid YouTube or Vimeo link'),
+        ];
 
         return array_merge(
             parent::getAttributes(),
@@ -24,6 +33,13 @@ class VideoLinkField extends URLField
         );
     }
 
+    /**
+     * Display a video preview
+     *
+     * @param  Varchar width
+     * @param  Varchar height
+     * @return VideoLinkField
+     */
     public function showPreview($maxwidth = 500, $height = '56%')
     {
         $this->display_video = $maxwidth;
@@ -31,6 +47,12 @@ class VideoLinkField extends URLField
         return $this;
     }
 
+    /**
+     * Return video preview
+     *
+     * @param  Null
+     * @return VideoLink
+     */
     public function getPreview()
     {
         $url = trim($this->value);
@@ -43,12 +65,24 @@ class VideoLinkField extends URLField
         }
     }
 
+    /**
+     * Return video title
+     *
+     * @param  Null
+     * @return String
+     */
     public function getVideoTitle()
     {
         $url = trim($this->value);
         return VideoLink::create()->setValue($url)->Title;
     }
 
+    /**
+     * Return validation result
+     *
+     * @param  Validator $validator
+     * @return Boolean
+     */
     public function validate($validator)
     {
         parent::validate($validator);
