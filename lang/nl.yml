@@ -1,0 +1,10 @@
+nl:
+  Axllent\FormFields\Forms\PhoneNumberField:
+    Placeholder: 'Telefoon nummer links zullen vooraf gaan met +{prefix}'
+    ValidationError: 'Voer een geldig telefoon nummer in'
+  Axllent\FormFields\Forms\URLField:
+    ValidationError: 'Voer een geldige URL toe inclusief http:// of https://'
+  Axllent\FormFields\Forms\VideoLinkField:
+    Placeholder: 'Voer een geldige Youtube of Vimeo link toe'
+    ValidationError: 'Voer een geldige Youtube of Vimeo link toe'
+    TemplateError: 'Indien er geen video verschijnt dan is de link mogelijk incorrect'
