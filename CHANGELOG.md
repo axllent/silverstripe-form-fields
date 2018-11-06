@@ -2,6 +2,12 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.3.0]
+
+- Add translation support (en/da/nl)
+- Add code DocBlocks
+
+
 ## [1.2.5]
 
 - Move templates to correct position
