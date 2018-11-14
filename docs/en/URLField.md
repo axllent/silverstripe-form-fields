@@ -10,7 +10,7 @@ It includes a placeholder with `http://www.exmaple.com` to indicate a full URL i
 ```php
 <?php
 
-use Axllent\FormFields\URLField;
+use Axllent\FormFields\Forms\URLField;
 
 class MyPage extends Page
 {
