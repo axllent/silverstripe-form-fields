@@ -2,6 +2,11 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.3.1]
+
+- Add Italian translation
+
+
 ## [1.3.0]
 
 - Add translation support (en/da/nl)
