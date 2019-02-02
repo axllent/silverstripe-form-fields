@@ -1,0 +1,10 @@
+it:
+  Axllent\FormFields\Forms\PhoneNumberField:
+    Placeholder: 'Il link al numero di telefono inizierà con +{prefix}'
+    ValidationError: 'Inserire un numero di telefono valido'
+  Axllent\FormFields\Forms\URLField:
+    ValidationError: 'Inserire un URL valido, includendo l''iniziale http:// o https://'
+  Axllent\FormFields\Forms\VideoLinkField:
+    Placeholder: 'Inserire un link a YouTube o Vimeo valido'
+    ValidationError: 'Inserire un link a YouTube o Vimeo valido'
+    TemplateError: 'Se non è possibile vedere il video sopra, l''URL inserito è probabilmente errato'
