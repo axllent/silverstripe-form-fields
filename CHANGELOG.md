@@ -2,6 +2,11 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.4.0]
+
+- Change URLField to `url` type
+
+
 ## [1.3.2]
 
 - Fix deprecated implode() order (php 7.4)
