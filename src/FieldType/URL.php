@@ -1,5 +1,4 @@
 <?php
-
 namespace Axllent\FormFields\FieldType;
 
 use SilverStripe\ORM\FieldType\DBVarchar;
@@ -14,6 +13,7 @@ class URL extends DBVarchar
     /**
      * Ensures that the methods are wrapped in the correct type and
      * values are safely escaped while rendering in the template.
+     *
      * @var array
      */
     private static $casting = [
@@ -30,12 +30,11 @@ class URL extends DBVarchar
     /**
      * Return constructed URL
      *
-     * @param  Null
-     * @return String
+     * @return string
      */
     public function URL()
     {
-        $p = $this->parse();
+        $p    = $this->parse();
         $link = '';
 
         $link .= (!empty($p['scheme'])) ? $p['scheme'] . '://' : false;
@@ -115,7 +114,8 @@ class URL extends DBVarchar
     /**
      * Parse the URL string.
      *
-     * @param  Boolean optional component
+     * @param bool $component Optional component
+     *
      * @return string eg: x=1&y=2
      */
     public function parse($component = false)

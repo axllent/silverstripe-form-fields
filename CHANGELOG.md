@@ -2,6 +2,12 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.3.2]
+
+- Fix deprecated implode() order (php 7.4)
+- Update PHP docblocks
+
+
 ## [1.3.1]
 
 - Add Italian translation

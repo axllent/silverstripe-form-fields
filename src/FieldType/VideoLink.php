@@ -1,5 +1,4 @@
 <?php
-
 namespace Axllent\FormFields\FieldType;
 
 use Psr\SimpleCache\CacheInterface;
@@ -13,13 +12,18 @@ use SilverStripe\Core\Injector\Injector;
 class VideoLink extends URL
 {
     /**
+     * Cache in seconds
+     * Default 7 days
+     *
+     * @var    int
      * @config
      */
-    private static $cache_seconds = 604800; // 7 days
+    private static $cache_seconds = 604800;
 
     /**
      * Ensures that the methods are wrapped in the correct type and
      * values are safely escaped while rendering in the template.
+     *
      * @var array
      */
     private static $casting = [
@@ -32,7 +36,6 @@ class VideoLink extends URL
     /**
      * Return the raw URL
      *
-     * @param  Null
      * @return String
      */
     public function URL()
@@ -43,12 +46,11 @@ class VideoLink extends URL
     /**
      * Return the iframe URL
      *
-     * @param  Null
      * @return String
      */
     public function getIframeURL()
     {
-        $info = $this->parseLink();
+        $info = $this->_parseLink();
         if (!$info) {
             return false;
         }
@@ -60,6 +62,7 @@ class VideoLink extends URL
             if ($params && !empty($params[strtolower($this->Service)])) {
                 $url .= '?' . http_build_query($params[strtolower($this->Service)], '', '&');
             }
+
             return $url;
         }
         if ($this->Service == 'YouTube') {
@@ -67,6 +70,7 @@ class VideoLink extends URL
             if ($params && !empty($params[strtolower($this->Service)])) {
                 $url .= '?' . http_build_query($params[strtolower($this->Service)], '', '&');
             }
+
             return $url;
         }
     }
@@ -74,57 +78,61 @@ class VideoLink extends URL
     /**
      * Return populated iframe template
      *
-     * @param  Varchar max width
-     * @param  Varchar height in proportion
+     * @param string $max_width Max width
+     * @param string $height    Height in percent or pixels
+     *
      * @return String
      */
-    public function iFrame($maxwidth = '100%', $height = '56%')
+    public function iFrame($max_width = '100%', $height = '56%')
     {
         $url = $this->getIFrameURL();
         if (!$url) {
             return false;
         }
-        if (is_numeric($maxwidth)) {
-            $maxwidth .= 'px';
+        if (is_numeric($max_width)) {
+            $max_width .= 'px';
         }
         if (is_numeric($height)) {
             $height .= 'px';
         }
-        return $this->customise([
-            'URL'      => $url,
-            'MaxWidth' => $maxwidth,
-            'Height'   => $height,
-        ])->renderWith('Axllent\\FormFields\\Layout\\VideoIframe');
+
+        return $this->customise(
+            [
+                'URL'      => $url,
+                'MaxWidth' => $max_width,
+                'Height'   => $height,
+            ]
+        )->renderWith('Axllent\\FormFields\\Layout\\VideoIframe');
     }
 
     /**
      * Return service based on URL
      *
-     * @param  Null
-     * @return String YouTube|Vimeo|null
+     * @return mixed YouTube|Vimeo|null
      */
     public function getService()
     {
-        $info = $this->parseLink();
+        $info = $this->_parseLink();
+
         return $info ? $info['VideoService'] : false;
     }
 
     /**
      * Return video ID
      *
-     * @param  Null
-     * @return String
+     * @return string
      */
     public function getVideoID()
     {
-        $info = $this->parseLink();
+        $info = $this->_parseLink();
+
         return $info ? $info['VideoID'] : false;
     }
 
     /**
      * Scrape Video information from hosting sites
-     * @param  Null
-     * @return String
+     *
+     * @return string
      */
     public function getTitle()
     {
@@ -151,8 +159,9 @@ class VideoLink extends URL
     /**
      * Return thumbnail URL
      *
-     * @param  Null
-     * @return String
+     * @param string $size (large|medium|small)
+     *
+     * @return string
      */
     public function thumbnailURL($size = 'large')
     {
@@ -160,7 +169,7 @@ class VideoLink extends URL
             return false;
         }
 
-        $info = $this->parseLink();
+        $info    = $this->_parseLink();
         $service = $this->getService();
 
         if (!$info || !$service) {
@@ -175,6 +184,7 @@ class VideoLink extends URL
             } else {
                 $img = 'default.jpg';
             }
+
             return 'https://i.ytimg.com/vi/' . $this->VideoID . '/' . $img;
         }
 
@@ -189,7 +199,7 @@ class VideoLink extends URL
 
             if ($size == 'large' && (!empty($data[0]['thumbnail_large']))) {
                 return $data[0]['thumbnail_large'];
-            } elseif ($size == 'medium' && (!empty($data[0]['thumbnail_medium']))) {
+            } elseif ($size == 'medium' && !empty($data[0]['thumbnail_medium'])) {
                 return $data[0]['thumbnail_medium'];
             } elseif (!empty($data[0]['thumbnail_small'])) {
                 return $data[0]['thumbnail_small'];
@@ -202,8 +212,9 @@ class VideoLink extends URL
     /**
      * Return cached json response
      *
-     * @param  String url
-     * @return Array|null
+     * @param string $url URL
+     *
+     * @return mixed
      */
     private function getCachedJsonResponse($url)
     {
@@ -229,7 +240,7 @@ class VideoLink extends URL
                 ],
             ]);
             try {
-                $res = $client->request('GET', $url);
+                $res  = $client->request('GET', $url);
                 $json = (string) $res->getBody();
             } catch (\GuzzleHttp\Exception\RequestException $e) {
                 return false;
@@ -238,16 +249,16 @@ class VideoLink extends URL
         }
 
         $data = @json_decode($json, true);
+
         return (!empty($data)) ? $data : false;
     }
 
     /**
      * Parse video link
      *
-     * @param  Null
-     * @return Array|Null
+     * @return mixed
      */
-    private function parseLink()
+    private function _parseLink()
     {
         $value = $this->RAW();
 

@@ -1,5 +1,4 @@
 <?php
-
 namespace Axllent\FormFields\FieldType;
 
 use SilverStripe\Core\Config\Config;
@@ -8,10 +7,20 @@ use SilverStripe\ORM\FieldType\DBVarchar;
 class PhoneNumber extends DBVarchar
 {
     /**
-     * @Config
+     * Default country code
+     *
+     * @var    int
+     * @config
      */
     private static $default_country_code = '64';
 
+    /**
+     * Contructor
+     *
+     * @param string $name    Field name
+     * @param int    $size    Size
+     * @param array  $options Options array
+     */
     public function __construct($name = null, $size = 100, $options = [])
     {
         parent::__construct($name, $options);
@@ -26,15 +35,15 @@ class PhoneNumber extends DBVarchar
     public function link()
     {
         $tel = $this->parseNumber();
+
         return (!empty($tel['RFC3966'])) ? $tel['RFC3966'] : false;
     }
 
     /**
      * Basic phone parser
-     * @param null
-     * @return Array
-     *
      * Note that this is a very basic parser
+     *
+     * @return array
      */
     public function parseNumber()
     {
@@ -53,16 +62,16 @@ class PhoneNumber extends DBVarchar
         // try detect if number starts with a + or international dialing code
         if (preg_match('/^(\+\d{1,3}\b)/', $str, $matches)) {
             $tel['CountryCode'] = substr($matches[1], 1);
-            $str = trim(substr($str, strlen($matches[0])));
+            $str                = trim(substr($str, strlen($matches[0])));
         } elseif (preg_match('/^(00|010|011|0011|810|0010|0011|0014)\s?(\d{1,3})\b/', $str, $matches)) {
             $tel['CountryCode'] = $matches[2];
-            $str = trim(substr($str, strlen($matches[0])));
+            $str                = trim(substr($str, strlen($matches[0])));
         }
 
         // try detect if an extension is included
         if (preg_match('/(#|ext|extension)\s?(\d)+$/', $str, $matches)) {
             $tel['Extension'] = $matches[2];
-            $str = trim(preg_replace('/' . preg_quote($matches[0], '/') . '$/', '', $str));
+            $str              = trim(preg_replace('/' . preg_quote($matches[0], '/') . '$/', '', $str));
         }
 
         // set default country code if none detected

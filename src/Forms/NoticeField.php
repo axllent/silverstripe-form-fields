@@ -6,7 +6,7 @@ use SilverStripe\Forms\LiteralField;
 class NoticeField extends LiteralField
 {
     /**
-     * @var mixed
+     * Content
      */
     protected $content;
 
@@ -30,7 +30,8 @@ class NoticeField extends LiteralField
         if ($all_tabs) {
             array_push($classes, 'persist');
         }
-        $content = '<div class="' . implode(' ', $classes) . '">' . $content . '</div>';
+        $content = '<div class="' . implode(' ', $classes) . '">' .
+            $content . '</div>';
 
         parent::__construct($name, $content);
     }

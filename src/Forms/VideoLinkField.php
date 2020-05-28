@@ -1,24 +1,30 @@
 <?php
-
 namespace Axllent\FormFields\Forms;
 
 use Axllent\FormFields\FieldType\VideoLink;
 
 class VideoLinkField extends URLField
 {
-
     /**
-     * @defaults
+     * Display video
+     *
+     * @var    bool
+     * @config
      */
     protected $display_video = false;
 
+    /**
+     * Preview height
+     *
+     * @var    bool
+     * @config
+     */
     protected $preview_height = false;
 
     /**
      * Return field attributes
      *
-     * @param  Null
-     * @return Array
+     * @return array
      */
     public function getAttributes()
     {
@@ -36,21 +42,22 @@ class VideoLinkField extends URLField
     /**
      * Display a video preview
      *
-     * @param  Varchar width
-     * @param  Varchar height
+     * @param int $max_width Maximum width
+     * @param int $height    Height in percent or pixels
+     *
      * @return VideoLinkField
      */
-    public function showPreview($maxwidth = 500, $height = '56%')
+    public function showPreview($max_width = 500, $height = '56%')
     {
-        $this->display_video = $maxwidth;
+        $this->display_video  = $max_width;
         $this->preview_height = $height;
+
         return $this;
     }
 
     /**
      * Return video preview
      *
-     * @param  Null
      * @return VideoLink
      */
     public function getPreview()
@@ -68,20 +75,21 @@ class VideoLinkField extends URLField
     /**
      * Return video title
      *
-     * @param  Null
      * @return String
      */
     public function getVideoTitle()
     {
         $url = trim($this->value);
+
         return VideoLink::create()->setValue($url)->Title;
     }
 
     /**
      * Return validation result
      *
-     * @param  Validator $validator
-     * @return Boolean
+     * @param Validator $validator Validator
+     *
+     * @return bool
      */
     public function validate($validator)
     {
@@ -98,9 +106,13 @@ class VideoLinkField extends URLField
         if (!$obj->getService()) {
             $validator->validationError(
                 $this->name,
-                _t(__CLASS__ . '.ValidationError', 'Please enter a valid YouTube or Vimeo link'),
+                _t(
+                    __CLASS__ . '.ValidationError',
+                    'Please enter a valid YouTube or Vimeo link'
+                ),
                 'validation'
             );
+
             return false;
         }
 

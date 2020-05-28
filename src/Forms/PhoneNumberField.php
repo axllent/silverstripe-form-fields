@@ -1,5 +1,4 @@
 <?php
-
 namespace Axllent\FormFields\Forms;
 
 use Axllent\FormFields\FieldType\PhoneNumber;
@@ -10,13 +9,12 @@ class PhoneNumberField extends TextField
     /**
      * Return field attributes
      *
-     * @param  Null
-     * @return Array
+     * @return array
      */
     public function getAttributes()
     {
         $defaultPrefix = PhoneNumber::config()->get('default_country_code');
-        $attributes = [
+        $attributes    = [
             'class'       => 'text',
             'placeholder' => _t(
                 __CLASS__ . '.Placeholder',
@@ -34,8 +32,9 @@ class PhoneNumberField extends TextField
     /**
      * Return validation result
      *
-     * @param  Validator $validator
-     * @return Boolean
+     * @param Validator $validator ValidationResult
+     *
+     * @return bool
      */
     public function validate($validator)
     {
@@ -51,9 +50,13 @@ class PhoneNumberField extends TextField
         if (!$phone->Link()) {
             $validator->validationError(
                 $this->name,
-                _t(__CLASS__ . '.ValidationError', 'Please enter a valid phone number'),
+                _t(
+                    __CLASS__ . '.ValidationError',
+                    'Please enter a valid phone number'
+                ),
                 'validation'
             );
+
             return false;
         }
 

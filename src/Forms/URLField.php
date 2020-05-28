@@ -1,5 +1,4 @@
 <?php
-
 namespace Axllent\FormFields\Forms;
 
 use SilverStripe\Forms\TextField;
@@ -9,8 +8,7 @@ class URLField extends TextField
     /**
      * Return field attributes
      *
-     * @param  Null
-     * @return Array
+     * @return array
      */
     public function getAttributes()
     {
@@ -28,8 +26,9 @@ class URLField extends TextField
     /**
      * Return validation result
      *
-     * @param  Validator $validator
-     * @return Boolean
+     * @param Validator $validator Validationr
+     *
+     * @return bool
      */
     public function validate($validator)
     {
@@ -44,9 +43,13 @@ class URLField extends TextField
             } else {
                 $validator->validationError(
                     $this->name,
-                    _t(__CLASS__ . '.ValidationError', 'Please enter a valid URL including the http:// or https://'),
+                    _t(
+                        __CLASS__ . '.ValidationError',
+                        'Please enter a valid URL including the http:// or https://'
+                    ),
                     'validation'
                 );
+
                 return false;
             }
         }
