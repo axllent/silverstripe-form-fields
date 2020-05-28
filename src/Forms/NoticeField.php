@@ -11,7 +11,7 @@ class NoticeField extends LiteralField
     protected $content;
 
     /**
-     * Contrustor
+     * Contructor
      *
      * @param string $name     Field name
      * @param string $content  HTML Content
