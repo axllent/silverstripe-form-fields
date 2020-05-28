@@ -6,6 +6,13 @@ use SilverStripe\Forms\TextField;
 class URLField extends TextField
 {
     /**
+     * Input type
+     *
+     * @var string
+     */
+    protected $inputType = 'url';
+
+    /**
      * Return field attributes
      *
      * @return array
