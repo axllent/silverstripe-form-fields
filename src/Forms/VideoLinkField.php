@@ -6,20 +6,20 @@ use Axllent\FormFields\FieldType\VideoLink;
 class VideoLinkField extends URLField
 {
     /**
-     * Display video
+     * Preview width
      *
-     * @var    bool
+     * @var    int|false
      * @config
      */
-    protected $display_video = false;
+    protected $preview_width = 500;
 
     /**
      * Preview height
      *
-     * @var    bool
+     * @var    string
      * @config
      */
-    protected $preview_height = false;
+    protected $preview_height = '56%';
 
     /**
      * Return field attributes
@@ -49,7 +49,7 @@ class VideoLinkField extends URLField
      */
     public function showPreview($max_width = 500, $height = '56%')
     {
-        $this->display_video  = $max_width;
+        $this->preview_width  = $max_width;
         $this->preview_height = $height;
 
         return $this;
@@ -63,12 +63,13 @@ class VideoLinkField extends URLField
     public function getPreview()
     {
         $url = trim($this->value);
-        if (!$this->display_video || !$url) {
+        if (!$this->preview_width || !$url) {
             return false;
         }
+
         $obj = VideoLink::create()->setValue($url);
         if ($obj->iFrameURL) {
-            return $obj->Iframe($this->display_video, $this->preview_height);
+            return $obj->Iframe($this->preview_width, $this->preview_height);
         }
     }
 

@@ -1,7 +1,8 @@
 # VideoLinkField
 
 VideoLinkField provides an easy way to add a validating input field for YouTube & Vimeo links,
-including an optional preview in the CMS if created with `->showPreview(<max_width>)` (see example below).
+including an optional preview in the CMS (disable with `$field->showPreview(false)` or set
+a maximum width with `$field->showPreview('100%')`
 
 ## Inserting a VideoLinkField
 
@@ -9,7 +10,6 @@ including an optional preview in the CMS if created with `->showPreview(<max_wid
 <?php
 
 use Axllent\FormFields\FieldType\VideoLink;
-use Axllent\FormFields\Forms\VideoLinkField;
 
 class MyPage extends Page
 {
@@ -22,10 +22,8 @@ class MyPage extends Page
     {
         $fields = parent::getCMSFields();
 
-        $fields->addFieldToTab('Root.Main',
-            VideoLinkField::create('FeaturedVideo')
-                ->showPreview(500)
-        );
+        $fields->dataFieldNyName('FeaturedVideo')
+            ->showPreview('100%');
 
         return $fields;
     }
