@@ -2,6 +2,13 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.5.0]
+
+- Set default form fields for PhoneNumber, URL & VideoLink
+- Set placeholder for URLField to https://wwww.example.com
+- Show video preview by default for VideoLinkField
+
+
 ## [1.4.0]
 
 - Change URLField to `url` type
