@@ -20,8 +20,8 @@ class URLField extends TextField
     public function getAttributes()
     {
         $attributes = [
-            'class'       => 'text',
-            'placeholder' => 'http://www.example.com',
+            'class'       => 'text url',
+            'placeholder' => 'https://www.example.com',
         ];
 
         return array_merge(
