@@ -1,6 +1,7 @@
 <?php
 namespace Axllent\FormFields\FieldType;
 
+use Axllent\FormFields\Forms\VideoLinkField;
 use Psr\SimpleCache\CacheInterface;
 use SilverStripe\Core\Injector\Injector;
 
@@ -32,6 +33,22 @@ class VideoLink extends URL
         'iFrameURL'    => 'HTMLFragment',
         'ThumbnailURL' => 'HTMLFragment',
     ];
+
+    /**
+     * Scaffold form field
+     * Set the URLField as the default field type
+     *
+     * @param string $title  Field title
+     * @param array  $params Parameters
+     *
+     * @return FormField
+     */
+    public function scaffoldFormField($title = null, $params = null)
+    {
+        $field = VideoLinkField::create($this->name, $title);
+
+        return $field;
+    }
 
     /**
      * Return the raw URL

@@ -1,6 +1,7 @@
 <?php
 namespace Axllent\FormFields\FieldType;
 
+use Axllent\FormFields\Forms\URLField;
 use SilverStripe\ORM\FieldType\DBVarchar;
 
 /**
@@ -26,6 +27,22 @@ class URL extends DBVarchar
         'Path'    => 'HTMLFragment',
         'Query'   => 'HTMLFragment',
     ];
+
+    /**
+     * Scaffold form field
+     * Set the URLField as the default field type
+     *
+     * @param string $title  Field title
+     * @param array  $params Parameters
+     *
+     * @return FormField
+     */
+    public function scaffoldFormField($title = null, $params = null)
+    {
+        $field = URLField::create($this->name, $title);
+
+        return $field;
+    }
 
     /**
      * Return constructed URL

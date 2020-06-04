@@ -1,6 +1,7 @@
 <?php
 namespace Axllent\FormFields\FieldType;
 
+use Axllent\FormFields\Forms\PhoneNumberField;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\ORM\FieldType\DBVarchar;
 
@@ -25,6 +26,22 @@ class PhoneNumber extends DBVarchar
     {
         parent::__construct($name, $options);
         $this->size = $size ? $size : 100;
+    }
+
+    /**
+     * Scaffold form field
+     * Set the URLField as the default field type
+     *
+     * @param string $title  Field title
+     * @param array  $params Parameters
+     *
+     * @return FormField
+     */
+    public function scaffoldFormField($title = null, $params = null)
+    {
+        $field = PhoneNumberField::create($this->name, $title);
+
+        return $field;
     }
 
     /**
