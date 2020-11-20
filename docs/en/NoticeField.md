@@ -10,7 +10,7 @@ error message would normally be shown), and includes a "close" button.
 If a `NoticeField` is set to **not** be persistent, is it simply shown in the form
 where you inserted it.
 
-NoticeFields use inbuilt SilverStripe 4 CSS classes, and defaults to the `notice`
+NoticeFields use inbuilt Silverstripe 4 CSS classes, and defaults to the `notice`
 class if none is specified. By default you can choose from:
 
 - good
