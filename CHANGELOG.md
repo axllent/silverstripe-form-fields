@@ -2,6 +2,12 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.5.1]
+
+- PSR-4 autoloading compatibility for Composer 2.0 (thanks [@obj63mc](https://github.com/obj63mc))
+- PSR2 tidy-up
+
+
 ## [1.5.0]
 
 - Set default form fields for PhoneNumber, URL & VideoLink
