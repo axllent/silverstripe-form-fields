@@ -1,5 +1,5 @@
 <?php
-namespace Axllent\FormFields;
+namespace Axllent\FormFields\Extensions;
 
 use SilverStripe\Admin\LeftAndMainExtension;
 use SilverStripe\View\Requirements;
