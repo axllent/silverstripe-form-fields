@@ -53,7 +53,7 @@ class VideoLink extends URL
     /**
      * Return the raw URL
      *
-     * @return String
+     * @return string
      */
     public function URL()
     {
@@ -63,7 +63,7 @@ class VideoLink extends URL
     /**
      * Return the iframe URL
      *
-     * @return String
+     * @return string
      */
     public function getIframeURL()
     {
@@ -98,7 +98,7 @@ class VideoLink extends URL
      * @param string $max_width Max width
      * @param string $height    Height in percent or pixels
      *
-     * @return String
+     * @return string
      */
     public function iFrame($max_width = '100%', $height = '56%')
     {
@@ -154,7 +154,7 @@ class VideoLink extends URL
     public function getTitle()
     {
         if ($this->getService() == 'YouTube') {
-            $data = $this->getCachedJsonResponse(
+            $data = $this->_getCachedJsonResponse(
                 'https://www.youtube.com/oembed?url=http://www.youtube.com/watch?v=' .
                 $this->VideoID .
                 '&format=json'
@@ -164,7 +164,7 @@ class VideoLink extends URL
             }
         }
         if ($this->getService() == 'Vimeo') {
-            $data = $this->getCachedJsonResponse(
+            $data = $this->_getCachedJsonResponse(
                 'https://vimeo.com/api/v2/video/' . $this->VideoID . '.json'
             );
             if ($data && !empty($data[0]) && !empty($data[0]['title'])) {
@@ -206,7 +206,7 @@ class VideoLink extends URL
         }
 
         if ($service == 'Vimeo') {
-            $data = $this->getCachedJsonResponse(
+            $data = $this->_getCachedJsonResponse(
                 'https://vimeo.com/api/v2/video/' . $this->VideoID . '.json'
             );
 
@@ -233,7 +233,7 @@ class VideoLink extends URL
      *
      * @return mixed
      */
-    private function getCachedJsonResponse($url)
+    private function _getCachedJsonResponse($url)
     {
         if (!class_exists('GuzzleHttp\Client')) {
             return false;
@@ -249,13 +249,15 @@ class VideoLink extends URL
         $key = md5($url);
 
         if (!$json = $cache->get($key)) {
-            $client = new \GuzzleHttp\Client([
-                'timeout' => 5, // seconds
-                'headers' => [ // Appear like a web browser
-                    'User-Agent'      => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:51.0) Gecko/20100101 Firefox/51.0',
-                    'Accept-Language' => 'en-US,en;q=0.5',
-                ],
-            ]);
+            $client = new \GuzzleHttp\Client(
+                [
+                    'timeout' => 5, // seconds
+                    'headers' => [ // Appear like a web browser
+                        'User-Agent'      => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:83.0) Gecko/20100101 Firefox/83.0',
+                        'Accept-Language' => 'en-US,en;q=0.5',
+                    ],
+                ]
+            );
             try {
                 $res  = $client->request('GET', $url);
                 $json = (string) $res->getBody();
@@ -289,7 +291,8 @@ class VideoLink extends URL
             '/(https?:\/\/)?(www\.)?(player\.)?vimeo\.com\/([a-z]*\/)*([0-9]{6,11})[?]?.*/i',
             $value,
             $matches
-        )) {
+        )
+        ) {
             foreach ($matches as $match) {
                 if (preg_match('/^[0-9]{6,12}$/', $match)) {
                     $output = [
@@ -298,7 +301,12 @@ class VideoLink extends URL
                     ];
                 }
             }
-        } elseif (preg_match('/https?:\/\/youtu\.be\/([a-z0-9\_\-]+)/i', $value, $matches)) {
+        } elseif (preg_match(
+            '/https?:\/\/youtu\.be\/([a-z0-9\_\-]+)/i',
+            $value,
+            $matches
+        )
+        ) {
             $output = [
                 'VideoID'      => $matches[1],
                 'VideoService' => 'YouTube',

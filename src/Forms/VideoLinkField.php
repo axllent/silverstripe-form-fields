@@ -30,7 +30,10 @@ class VideoLinkField extends URLField
     {
         $attributes = [
             'class'       => 'text',
-            'placeholder' => _t(__CLASS__ . '.Placeholder', 'Enter a valid YouTube or Vimeo link'),
+            'placeholder' => _t(
+                __CLASS__ . '.Placeholder',
+                'Enter a valid YouTube or Vimeo link'
+            ),
         ];
 
         return array_merge(

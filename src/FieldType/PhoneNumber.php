@@ -73,14 +73,23 @@ class PhoneNumber extends DBVarchar
 
         // replace characters with space
         $str = trim(
-            preg_replace('/\s+/', ' ', preg_replace('/[^a-z0-9\#\+]/i', ' ', strtolower($str)))
+            preg_replace(
+                '/\s+/',
+                ' ',
+                preg_replace('/[^a-z0-9\#\+]/i', ' ', strtolower($str))
+            )
         );
 
         // try detect if number starts with a + or international dialing code
         if (preg_match('/^(\+\d{1,3}\b)/', $str, $matches)) {
             $tel['CountryCode'] = substr($matches[1], 1);
             $str                = trim(substr($str, strlen($matches[0])));
-        } elseif (preg_match('/^(00|010|011|0011|810|0010|0011|0014)\s?(\d{1,3})\b/', $str, $matches)) {
+        } elseif (preg_match(
+            '/^(00|010|011|0011|810|0010|0011|0014)\s?(\d{1,3})\b/',
+            $str,
+            $matches
+        )
+        ) {
             $tel['CountryCode'] = $matches[2];
             $str                = trim(substr($str, strlen($matches[0])));
         }
@@ -88,7 +97,9 @@ class PhoneNumber extends DBVarchar
         // try detect if an extension is included
         if (preg_match('/(#|ext|extension)\s?(\d)+$/', $str, $matches)) {
             $tel['Extension'] = $matches[2];
-            $str              = trim(preg_replace('/' . preg_quote($matches[0], '/') . '$/', '', $str));
+            $str              = trim(
+                preg_replace('/' . preg_quote($matches[0], '/') . '$/', '', $str)
+            );
         }
 
         // set default country code if none detected
@@ -107,7 +118,9 @@ class PhoneNumber extends DBVarchar
         }
 
         // generate a RFC3966 link
-        $tel['RFC3966'] = 'tel:+' . $tel['CountryCode'] . '-' . preg_replace('/[^0-9]/', '-', $str);
+        $tel['RFC3966'] = 'tel:+' . $tel['CountryCode'] . '-' .
+        preg_replace('/[^0-9]/', '-', $str);
+
         if (!empty($tel['Extension'])) {
             $tel['RFC3966'] .= ';ext=' . $tel['Extension'];
         }
