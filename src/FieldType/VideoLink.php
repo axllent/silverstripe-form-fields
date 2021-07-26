@@ -302,6 +302,17 @@ class VideoLink extends URL
                 }
             }
         } elseif (preg_match(
+            '/https?:\/\/(www\.)?youtube\.com\/embed\/([a-z0-9\_\-]+)$/i',
+            $value,
+            $matches
+        )
+        ) {
+            // https://www.youtube.com/embed/xxx
+            $output = [
+                'VideoID'      => $matches[2],
+                'VideoService' => 'YouTube',
+            ];
+        } elseif (preg_match(
             '/https?:\/\/youtu\.be\/([a-z0-9\_\-]+)/i',
             $value,
             $matches
