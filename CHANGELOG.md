@@ -2,6 +2,11 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.5.2]
+
+- Add support for embedded YouTube links (eg: `eg: https://www.youtube.com/embed/xxx`)
+
+
 ## [1.5.1]
 
 - PSR-4 autoloading compatibility for Composer 2.0 (thanks [@obj63mc](https://github.com/obj63mc))
