@@ -207,8 +207,10 @@ class VideoLink extends URL
 
         if ($service == 'Vimeo') {
              $data = $this->_getCachedJsonResponse(
-                'https://vimeo.com/api/oembed.json?url=https://player.vimeo.com/video/' .
-                    $this->VideoID
+                'https://vimeo.com/api/oembed.json?url=' .
+                    urlencode(
+                        'https://player.vimeo.com/video/' . $this->VideoID
+                    )
             );
 
             if (!$data || empty($data['thumbnail_url'])) {
