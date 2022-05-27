@@ -73,9 +73,9 @@ Thumbnail sizes vary depending on service.
 
 **Vimeo:**
 
-- large: 640px × scaled height (scaled)
-- medium: 200px × 150px (cropped)
-- small: 100px × 75px (cropped)
+- large: 1280px × 720px
+- medium: 640px × 360px
+- small: 426px × 240px
 
 
 ## Customisation of the video parameters

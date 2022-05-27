@@ -206,20 +206,30 @@ class VideoLink extends URL
         }
 
         if ($service == 'Vimeo') {
-            $data = $this->_getCachedJsonResponse(
-                'https://vimeo.com/api/v2/video/' . $this->VideoID . '.json'
+             $data = $this->_getCachedJsonResponse(
+                'https://vimeo.com/api/oembed.json?url=' .
+                    urlencode(
+                        'https://player.vimeo.com/video/' . $this->VideoID
+                    )
             );
 
-            if (!$data) {
+            if (!$data || empty($data['thumbnail_url'])) {
                 return false;
             }
 
-            if ($size == 'large' && (!empty($data[0]['thumbnail_large']))) {
-                return $data[0]['thumbnail_large'];
-            } elseif ($size == 'medium' && !empty($data[0]['thumbnail_medium'])) {
-                return $data[0]['thumbnail_medium'];
+            $parts = explode('_', $data['thumbnail_url']);
+            $thumbUrl = str_replace(
+                $parts[count($parts) - 1],
+                '',
+                $data['thumbnail_url']
+            );
+
+            if ($size == 'large' && $thumbUrl) {
+                return $thumbUrl . '1280x720';
+            } elseif ($size == 'medium' && $thumbUrl) {
+                return $thumbUrl . '640x360';
             } elseif (!empty($data[0]['thumbnail_small'])) {
-                return $data[0]['thumbnail_small'];
+                return $thumbUrl . '426x240 ';
             }
         }
 
