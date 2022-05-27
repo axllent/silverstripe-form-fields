@@ -19,10 +19,13 @@ class MyPage extends Page
     {
         $fields = parent::getCMSFields();
 
-        $fields->addFieldsToTab('Root.Main', [
-            URLField::create('FacebookURL'),
-            URLField::create('YouTubeURL')
-        ]);
+        $fields->addFieldsToTab(
+            'Root.Main',
+            [
+                URLField::create('FacebookURL'),
+                URLField::create('YouTubeURL')
+            ]
+        );
 
         return $fields;
     }

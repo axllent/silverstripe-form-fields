@@ -4,7 +4,7 @@ This adds the a `VideoLink` field type to your database. It extends the [URL](UR
 and provides additional validation, iframe generation, video thumbnails and can extract video titles.
 
 **Note:** Certain functionality requires interaction with third party APIs, namely video titles
-(if used) and Vimeo thumdnails. This uses officiel APIs prvided by YouTube and Vimeo, and does not
+(if used) and Vimeo thumbnails. This uses official APIs provided by YouTube and Vimeo, and does not
 require API keys. It does however require `guzzlehttp/guzzle` to be installed. See **Requirements** below.
 
 
@@ -55,27 +55,32 @@ automatically from the service, however you can add custom variables (see **Cust
 
 ### $ThumbnailURL([large|medium|small])
 
-Due to the fixed set sizes of the video hosting providers we can only safely return three sized
-of thumbnails, namely small, medium and large. The exact sizes differ between YouTube and Vimeo.
+YouTube only provide a limited set of thumbnail sizes, the default "high quality" thumbnail of 480x360px
+which has a proportional ratio of 4:3 (why YouTube, why......?). A much higher quality 16:9 option is
+usually available (1280x720px), however not all videos have this.
 
-Vimeo thumbnail support requires `guzzlehttp/guzzle`.
+Vimeo's provides dynamic sizing, however have been set to match the three YouTube sizes.
+
+**Note:** Vimeo thumbnail support requires `guzzlehttp/guzzle`.
 
 
 #### Thumbnail Sizes:
 
-Thumbnail sizes vary depending on service.
+The default size of `$ThumbnailURL` is "medium".
+
 
 **YouTube:** (black bars added if video size ratio differs from set size)
 
-- large: 480px × 360px
-- medium: 320px × 180px
-- small: 120px × 90px
+- large: 1280x720px (ratio 16:9 - not all videos have this size!)
+- medium: 480x360px (ratio 4:3 - YouTube default)
+- small: 320×180px (ratio 16:9)
 
-**Vimeo:**
 
-- large: 1280px × 720px
-- medium: 640px × 360px
-- small: 426px × 240px
+**Vimeo:** (crops nicely to avoid black bars)
+
+- large: 1280x720px (ratio 16:9)
+- medium: 480x360px (ratio 4:3 to match YouTube's medium size)
+- small: 320x180px (ratio 16:9)
 
 
 ## Customisation of the video parameters

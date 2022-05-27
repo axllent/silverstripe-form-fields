@@ -37,17 +37,20 @@ class MyPage extends Page
         $fields = parent::getCMSFields();
 
         /* Persistent NoticeFields across all tabs */
-        $fields->addFieldsToTab('Root.Main', [
-            NoticeField::create('Notice1','This is a default notice', 'notice'),
-            NoticeField::create('Notice2','This is a good notice', 'good'),
-            NoticeField::create('Notice3','This is a bad notice', 'bad'),
-            NoticeField::create('Notice4','This is a warning notice', 'warning'),
-        ]);
+        $fields->addFieldsToTab(
+            'Root.Main',
+            [
+                NoticeField::create('Notice1','This is a default notice', 'notice'),
+                NoticeField::create('Notice2','This is a good notice', 'good'),
+                NoticeField::create('Notice3','This is a bad notice', 'bad'),
+                NoticeField::create('Notice4','This is a warning notice', 'warning'),
+            ]
+        );
 
         /* Non-persistent NoticeField (note the 4th parameter `false`) */
         $fields->addFieldToTab(
             'Root.Main',
-            NoticeField::create('Notice5','You must enter content', 'warning', false),
+            NoticeField::create('Notice5', 'You must enter content', 'warning', false),
             'Content'
         );
 

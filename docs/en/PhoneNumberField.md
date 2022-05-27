@@ -31,7 +31,8 @@ class MyPage extends Page
     {
         $fields = parent::getCMSFields();
 
-        $fields->addFieldToTab('Root.Main',
+        $fields->addFieldToTab(
+            'Root.Main',
             PhoneNumberField::create('PhoneNumber')
         );
 

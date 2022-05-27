@@ -10,8 +10,8 @@ use Axllent\FormFields\FieldType\Blob;
 
 class MyObject extends DataObject
 {
-    private static $db = array(
+    private static $db = [
         'EncryptedData' => Blob::class
-    );
+    ];
 }
 ```
