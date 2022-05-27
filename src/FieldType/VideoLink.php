@@ -77,7 +77,8 @@ class VideoLink extends URL
         if ($this->Service == 'Vimeo') {
             $url = 'https://player.vimeo.com/video/' . $this->VideoID;
             if ($params && !empty($params[strtolower($this->Service)])) {
-                $url .= '?' . http_build_query($params[strtolower($this->Service)], '', '&');
+                $url .= '?'
+                . http_build_query($params[strtolower($this->Service)], '', '&');
             }
 
             return $url;
@@ -85,7 +86,8 @@ class VideoLink extends URL
         if ($this->Service == 'YouTube') {
             $url = 'https://www.youtube.com/embed/' . $this->VideoID;
             if ($params && !empty($params[strtolower($this->Service)])) {
-                $url .= '?' . http_build_query($params[strtolower($this->Service)], '', '&');
+                $url .= '?'
+                . http_build_query($params[strtolower($this->Service)], '', '&');
             }
 
             return $url;
@@ -155,9 +157,12 @@ class VideoLink extends URL
     {
         if ($this->getService() == 'YouTube') {
             $data = $this->_getCachedJsonResponse(
-                'https://www.youtube.com/oembed?url=http://www.youtube.com/watch?v=' .
-                $this->VideoID .
-                '&format=json'
+                'https://www.youtube.com/oembed?url=' .
+                urlencode(
+                    'http://www.youtube.com/watch?v=' .
+                    $this->VideoID
+                )
+                . '&format=json'
             );
             if ($data && !empty($data['title'])) {
                 return $data['title'];
@@ -165,10 +170,13 @@ class VideoLink extends URL
         }
         if ($this->getService() == 'Vimeo') {
             $data = $this->_getCachedJsonResponse(
-                'https://vimeo.com/api/v2/video/' . $this->VideoID . '.json'
+                'https://vimeo.com/api/oembed.json?url=' .
+                urlencode(
+                    'https://player.vimeo.com/video/' . $this->VideoID
+                )
             );
-            if ($data && !empty($data[0]) && !empty($data[0]['title'])) {
-                return $data[0]['title'];
+            if ($data && !empty($data['title'])) {
+                return $data['title'];
             }
         }
     }
@@ -180,7 +188,7 @@ class VideoLink extends URL
      *
      * @return string
      */
-    public function thumbnailURL($size = 'large')
+    public function thumbnailURL($size = 'medium')
     {
         if (!in_array($size, ['large', 'medium', 'small'])) {
             return false;
@@ -195,41 +203,45 @@ class VideoLink extends URL
 
         if ($service == 'YouTube') {
             if ($size == 'large') {
-                $img = 'hqdefault.jpg';
+                $img = 'maxresdefault.jpg';
             } elseif ($size == 'medium') {
-                $img = 'mqdefault.jpg';
+                $img = 'hqdefault.jpg';
             } else {
-                $img = 'default.jpg';
+                $img = 'mqdefault.jpg';
             }
 
             return 'https://i.ytimg.com/vi/' . $this->VideoID . '/' . $img;
         }
 
         if ($service == 'Vimeo') {
-             $data = $this->_getCachedJsonResponse(
+            $data = $this->_getCachedJsonResponse(
                 'https://vimeo.com/api/oembed.json?url=' .
-                    urlencode(
-                        'https://player.vimeo.com/video/' . $this->VideoID
-                    )
+                urlencode(
+                    'https://player.vimeo.com/video/' . $this->VideoID
+                )
             );
 
             if (!$data || empty($data['thumbnail_url'])) {
                 return false;
             }
 
-            $parts = explode('_', $data['thumbnail_url']);
+            $parts    = explode('_', $data['thumbnail_url']);
             $thumbUrl = str_replace(
                 $parts[count($parts) - 1],
                 '',
                 $data['thumbnail_url']
             );
 
-            if ($size == 'large' && $thumbUrl) {
+            if (!$thumbUrl) {
+                return false;
+            }
+
+            if ($size == 'large') {
                 return $thumbUrl . '1280x720';
-            } elseif ($size == 'medium' && $thumbUrl) {
-                return $thumbUrl . '640x360';
-            } elseif (!empty($data[0]['thumbnail_small'])) {
-                return $thumbUrl . '426x240 ';
+            } elseif ($size == 'medium') {
+                return $thumbUrl . '480x360';
+            } else {
+                return $thumbUrl . '320x180';
             }
         }
 
