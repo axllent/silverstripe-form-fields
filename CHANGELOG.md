@@ -4,7 +4,7 @@ Notable changes to this project will be documented in this file.
 
 ## [1.6.0]
 
-- Use Vimeo's oembed.json to return VideoLink metadata for title and thumbnail URL, allowing it to work with non-public videos.
+- Use Vimeo's oembed.json to return VideoLink metadata for title and thumbnail URL, allowing it to work with non-public videos (thanks @nicolas-cusan).
 - VideoLink `$ThumbnailURL(large)` thumbnails are now 1280x720px. Note that only high quality YouTube videos have this size, so mileage may vary.
 - Default VideoLink thumbnail size is now `medium` (480x360px), which was previously `large`. This image size has a ratio of 4:3 due to YouTube's limited sizing. This is the safe YouTube default.
 - VideoLink `$Iframe` hidden overflow decreased from 2% to 1% to minimize offset.
