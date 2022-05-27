@@ -26,7 +26,7 @@ See docs for more information.
 ## Requirements
 
 - Silverstripe ^4.0 CMS
-- [Guzzle](https://github.com/guzzle/guzzle) (if you require fetching of Vimeo thumbnails for VideoLink)
+- [Guzzle](https://github.com/guzzle/guzzle) if you require fetching of Vimeo thumbnails for VideoLink (`composer require guzzlehttp/guzzle`)
 
 
 ## Installation via Composer
