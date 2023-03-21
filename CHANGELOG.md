@@ -2,6 +2,12 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.6.1]
+
+- Fix PHP 8.1 deprecation warnings
+- Support for Silverstripe 5
+
+
 ## [1.6.0]
 
 - Use Vimeo's oembed.json to return VideoLink metadata for title and thumbnail URL, allowing it to work with non-public videos (thanks @nicolas-cusan).
