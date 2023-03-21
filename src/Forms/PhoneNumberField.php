@@ -1,4 +1,5 @@
 <?php
+
 namespace Axllent\FormFields\Forms;
 
 use Axllent\FormFields\FieldType\PhoneNumber;
@@ -39,7 +40,7 @@ class PhoneNumberField extends TextField
     public function validate($validator)
     {
         // Don't validate empty fields
-        $this->value = trim($this->value);
+        $this->value = trim(strval($this->value));
 
         if (empty($this->value)) {
             return true;

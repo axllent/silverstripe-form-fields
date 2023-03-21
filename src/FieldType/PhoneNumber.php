@@ -1,4 +1,5 @@
 <?php
+
 namespace Axllent\FormFields\FieldType;
 
 use Axllent\FormFields\Forms\PhoneNumberField;
@@ -10,7 +11,8 @@ class PhoneNumber extends DBVarchar
     /**
      * Default country code
      *
-     * @var    int
+     * @var int
+     *
      * @config
      */
     private static $default_country_code = '64';
@@ -39,9 +41,7 @@ class PhoneNumber extends DBVarchar
      */
     public function scaffoldFormField($title = null, $params = null)
     {
-        $field = PhoneNumberField::create($this->name, $title);
-
-        return $field;
+        return PhoneNumberField::create($this->name, $title);
     }
 
     /**
@@ -69,7 +69,7 @@ class PhoneNumber extends DBVarchar
         ];
 
         // remove brackets
-        $str = str_replace(['(', ')'], '', $this->value);
+        $str = str_replace(['(', ')'], '', strval($this->value));
 
         // replace characters with space
         $str = trim(
@@ -108,7 +108,7 @@ class PhoneNumber extends DBVarchar
         }
 
         // remove leading 0
-        if (substr($str, 0, 1) == '0') {
+        if ('0' == substr($str, 0, 1)) {
             $str = trim(substr($str, 1));
         }
 

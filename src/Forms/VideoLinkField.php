@@ -1,4 +1,5 @@
 <?php
+
 namespace Axllent\FormFields\Forms;
 
 use Axllent\FormFields\FieldType\VideoLink;
@@ -8,7 +9,8 @@ class VideoLinkField extends URLField
     /**
      * Preview width
      *
-     * @var    int|false
+     * @var false|int
+     *
      * @config
      */
     protected $preview_width = 500;
@@ -16,7 +18,8 @@ class VideoLinkField extends URLField
     /**
      * Preview height
      *
-     * @var    string
+     * @var string
+     *
      * @config
      */
     protected $preview_height = '56%';
@@ -65,7 +68,7 @@ class VideoLinkField extends URLField
      */
     public function getPreview()
     {
-        $url = trim($this->value);
+        $url = trim(strval($this->value));
         if (!$this->preview_width || !$url) {
             return false;
         }
@@ -79,11 +82,11 @@ class VideoLinkField extends URLField
     /**
      * Return video title
      *
-     * @return String
+     * @return string
      */
     public function getVideoTitle()
     {
-        $url = trim($this->value);
+        $url = trim(strval($this->value));
 
         return VideoLink::create()->setValue($url)->Title;
     }

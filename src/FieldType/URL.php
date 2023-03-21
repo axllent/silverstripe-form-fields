@@ -1,4 +1,5 @@
 <?php
+
 namespace Axllent\FormFields\FieldType;
 
 use Axllent\FormFields\Forms\URLField;
@@ -39,9 +40,7 @@ class URL extends DBVarchar
      */
     public function scaffoldFormField($title = null, $params = null)
     {
-        $field = URLField::create($this->name, $title);
-
-        return $field;
+        return URLField::create($this->name, $title);
     }
 
     /**
@@ -137,14 +136,15 @@ class URL extends DBVarchar
      */
     public function parse($component = false)
     {
-        $parts = parse_url($this->RAW());
+        $parts = parse_url(strval($this->RAW()));
 
         if (!$component) {
             return $parts;
-        } elseif (!empty($parts[$component])) {
-            return $parts[$component];
-        } else {
-            return false;
         }
+        if (!empty($parts[$component])) {
+            return $parts[$component];
+        }
+
+        return false;
     }
 }
