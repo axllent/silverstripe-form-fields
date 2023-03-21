@@ -1,6 +1,6 @@
 # Custom Silverstripe forms & fields
 
-An extension that adds custom form fields & types to the Silverstripe 4.
+An extension that adds custom form fields & types to the Silverstripe 4 & 5.
 
 
 ## Form Types
@@ -25,7 +25,7 @@ See docs for more information.
 
 ## Requirements
 
-- Silverstripe ^4.0 CMS
+- Silverstripe CMS ^4.0 || ^5.0
 - [Guzzle](https://github.com/guzzle/guzzle) if you require fetching of Vimeo thumbnails for VideoLink (`composer require guzzlehttp/guzzle`)
 
 
