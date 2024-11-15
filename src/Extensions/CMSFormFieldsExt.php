@@ -1,10 +1,11 @@
 <?php
+
 namespace Axllent\FormFields\Extensions;
 
-use SilverStripe\Admin\LeftAndMainExtension;
+use SilverStripe\Core\Extension;
 use SilverStripe\View\Requirements;
 
-class CMSFormFieldsExt extends LeftAndMainExtension
+class CMSFormFieldsExt extends Extension
 {
     /**
      * Init
