@@ -3,6 +3,11 @@
 Notable changes to this project will be documented in this file.
 
 
+## [1.6.3]
+
+- Bugfix: remove unnecessary init()
+
+
 ## [1.6.2]
 
 - Replace deprecated LeftAndMainExtension with Extension
