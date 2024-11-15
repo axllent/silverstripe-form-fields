@@ -14,8 +14,6 @@ class CMSFormFieldsExt extends Extension
      */
     public function init()
     {
-        parent::init();
-
         Requirements::css(
             'axllent/silverstripe-form-fields: css/cms-form-fields.css'
         );
