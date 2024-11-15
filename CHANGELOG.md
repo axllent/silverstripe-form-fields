@@ -2,6 +2,12 @@
 
 Notable changes to this project will be documented in this file.
 
+
+## [1.6.2]
+
+- Replace deprecated LeftAndMainExtension with Extension
+
+
 ## [1.6.1]
 
 - Fix PHP 8.1 deprecation warnings
