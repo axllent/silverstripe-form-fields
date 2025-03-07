@@ -3,6 +3,7 @@
 namespace Axllent\FormFields\Forms;
 
 use Axllent\FormFields\FieldType\VideoLink;
+use SilverStripe\Core\Validation\ValidationResult;
 
 class VideoLinkField extends URLField
 {
@@ -94,24 +95,22 @@ class VideoLinkField extends URLField
     /**
      * Return validation result
      *
-     * @param Validator $validator Validator
-     *
      * @return bool
      */
-    public function validate($validator)
+    public function validate(): ValidationResult
     {
-        parent::validate($validator);
+        $result = ValidationResult::create();
 
         // Don't validate empty fields
         if (empty($this->value)) {
-            return true;
+            return $result;
         }
 
         // Use the VideoLink object to validate
         $obj = VideoLink::create()->setValue($this->value);
 
         if (!$obj->getService()) {
-            $validator->validationError(
+            $result->addFieldError(
                 $this->name,
                 _t(
                     __CLASS__ . '.ValidationError',
@@ -119,10 +118,8 @@ class VideoLinkField extends URLField
                 ),
                 'validation'
             );
-
-            return false;
         }
 
-        return true;
+        return $result;
     }
 }

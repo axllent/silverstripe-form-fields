@@ -3,6 +3,7 @@
 namespace Axllent\FormFields\FieldType;
 
 use Axllent\FormFields\Forms\URLField;
+use SilverStripe\Forms\FormField;
 use SilverStripe\ORM\FieldType\DBVarchar;
 
 /**
@@ -35,20 +36,16 @@ class URL extends DBVarchar
      *
      * @param string $title  Field title
      * @param array  $params Parameters
-     *
-     * @return FormField
      */
-    public function scaffoldFormField($title = null, $params = null)
+    public function scaffoldFormField($title = null, $params = []): ?FormField
     {
         return URLField::create($this->name, $title);
     }
 
     /**
      * Return constructed URL
-     *
-     * @return string
      */
-    public function URL()
+    public function URL(): string
     {
         $p    = $this->parse();
         $link = '';

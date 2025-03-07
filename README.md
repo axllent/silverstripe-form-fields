@@ -1,6 +1,6 @@
 # Custom Silverstripe forms & fields
 
-An extension that adds custom form fields & types to the Silverstripe 4 & 5.
+An extension that adds custom form fields & types to the Silverstripe 6.
 
 
 ## Form Types
@@ -8,7 +8,7 @@ An extension that adds custom form fields & types to the Silverstripe 4 & 5.
 See docs for more information.
 
 - [PhoneNumberField](docs/en/PhoneNumberField.md) - Field for a single phone number (provides `Link()` support) with validation.
-- [NoticeField](docs/en/NoticeField.md) - Add notices into the CMS. NoticeFields can be persistent across all tabs and are dismissable.
+- [NoticeField](docs/en/NoticeField.md) - Add notices into the CMS. NoticeFields can be persistent across all tabs and are dismissible.
 - [URLField](docs/en/URLField.md) - Easily add an validating input field for URLs.
 - [VideoLinkField](docs/en/VideoLinkField.md) - Easy embedding of YouTube & Vimeo video fields in the CMS.
 
@@ -25,7 +25,7 @@ See docs for more information.
 
 ## Requirements
 
-- Silverstripe CMS ^4.0 || ^5.0
+- Silverstripe CMS ^6.0
 - [Guzzle](https://github.com/guzzle/guzzle) if you require fetching of Vimeo thumbnails for VideoLink (`composer require guzzlehttp/guzzle`)
 
 

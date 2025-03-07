@@ -1,9 +1,13 @@
 <?php
+
 namespace Axllent\FormFields\FieldType;
 
 use Axllent\FormFields\Forms\VideoLinkField;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use Psr\SimpleCache\CacheInterface;
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Forms\FormField;
 
 /**
  * VideoLink - oEmbeded Video
@@ -16,7 +20,8 @@ class VideoLink extends URL
      * Cache in seconds
      * Default 7 days
      *
-     * @var    int
+     * @var int
+     *
      * @config
      */
     private static $cache_seconds = 604800;
@@ -40,22 +45,16 @@ class VideoLink extends URL
      *
      * @param string $title  Field title
      * @param array  $params Parameters
-     *
-     * @return FormField
      */
-    public function scaffoldFormField($title = null, $params = null)
+    public function scaffoldFormField($title = null, $params = null): FormField
     {
-        $field = VideoLinkField::create($this->name, $title);
-
-        return $field;
+        return VideoLinkField::create($this->name, $title);
     }
 
     /**
      * Return the raw URL
-     *
-     * @return string
      */
-    public function URL()
+    public function URL(): string
     {
         return $this->RAW();
     }
@@ -74,7 +73,7 @@ class VideoLink extends URL
 
         $params = $this->Config()->get('service');
 
-        if ($this->Service == 'Vimeo') {
+        if ('Vimeo' == $this->Service) {
             $url = 'https://player.vimeo.com/video/' . $this->VideoID;
             if ($params && !empty($params[strtolower($this->Service)])) {
                 $url .= '?'
@@ -83,7 +82,7 @@ class VideoLink extends URL
 
             return $url;
         }
-        if ($this->Service == 'YouTube') {
+        if ('YouTube' == $this->Service) {
             $url = 'https://www.youtube.com/embed/' . $this->VideoID;
             if ($params && !empty($params[strtolower($this->Service)])) {
                 $url .= '?'
@@ -121,7 +120,7 @@ class VideoLink extends URL
                 'MaxWidth' => $max_width,
                 'Height'   => $height,
             ]
-        )->renderWith('Axllent\\FormFields\\Layout\\VideoIframe');
+        )->renderWith('Axllent\FormFields\Layout\VideoIframe');
     }
 
     /**
@@ -155,7 +154,7 @@ class VideoLink extends URL
      */
     public function getTitle()
     {
-        if ($this->getService() == 'YouTube') {
+        if ('YouTube' == $this->getService()) {
             $data = $this->_getCachedJsonResponse(
                 'https://www.youtube.com/oembed?url=' .
                 urlencode(
@@ -168,7 +167,7 @@ class VideoLink extends URL
                 return $data['title'];
             }
         }
-        if ($this->getService() == 'Vimeo') {
+        if ('Vimeo' == $this->getService()) {
             $data = $this->_getCachedJsonResponse(
                 'https://vimeo.com/api/oembed.json?url=' .
                 urlencode(
@@ -201,10 +200,10 @@ class VideoLink extends URL
             return false;
         }
 
-        if ($service == 'YouTube') {
-            if ($size == 'large') {
+        if ('YouTube' == $service) {
+            if ('large' == $size) {
                 $img = 'maxresdefault.jpg';
-            } elseif ($size == 'medium') {
+            } elseif ('medium' == $size) {
                 $img = 'hqdefault.jpg';
             } else {
                 $img = 'mqdefault.jpg';
@@ -213,7 +212,7 @@ class VideoLink extends URL
             return 'https://i.ytimg.com/vi/' . $this->VideoID . '/' . $img;
         }
 
-        if ($service == 'Vimeo') {
+        if ('Vimeo' == $service) {
             $data = $this->_getCachedJsonResponse(
                 'https://vimeo.com/api/oembed.json?url=' .
                 urlencode(
@@ -236,13 +235,14 @@ class VideoLink extends URL
                 return false;
             }
 
-            if ($size == 'large') {
+            if ('large' == $size) {
                 return $thumbUrl . '1280x720';
-            } elseif ($size == 'medium') {
-                return $thumbUrl . '480x360';
-            } else {
-                return $thumbUrl . '320x180';
             }
+            if ('medium' == $size) {
+                return $thumbUrl . '480x360';
+            }
+
+            return $thumbUrl . '320x180';
         }
 
         return false;
@@ -271,7 +271,7 @@ class VideoLink extends URL
         $key = md5($url);
 
         if (!$json = $cache->get($key)) {
-            $client = new \GuzzleHttp\Client(
+            $client = new Client(
                 [
                     'timeout' => 5, // seconds
                     'headers' => [ // Appear like a web browser
@@ -280,10 +280,11 @@ class VideoLink extends URL
                     ],
                 ]
             );
+
             try {
                 $res  = $client->request('GET', $url);
                 $json = (string) $res->getBody();
-            } catch (\GuzzleHttp\Exception\RequestException $e) {
+            } catch (RequestException $e) {
                 return false;
             }
             $cache->set($key, $json, $cache_seconds);

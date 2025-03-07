@@ -1,4 +1,5 @@
 <?php
+
 namespace Axllent\FormFields\FieldType;
 
 use SilverStripe\ORM\DB;
@@ -8,10 +9,8 @@ class Blob extends DBField
 {
     /**
      * Add the field to the underlying database.
-     *
-     * @return void
      */
-    public function requireField()
+    public function requireField(): void
     {
         DB::require_field($this->getTable(), $this->getName(), 'blob');
     }

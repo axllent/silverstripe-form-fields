@@ -13,14 +13,14 @@
     "authors": [
         {
             "name": "Ralph Slooten",
-            "homepage": "http://www.axllent.org/"
+            "homepage": "https://www.axllent.org/"
         }
     ],
     "support": {
         "issues": "https://github.com/axllent/silverstripe-form-fields/issues"
     },
     "require": {
-        "silverstripe/framework": "^4.0 || ^5.0"
+        "silverstripe/framework": "^6.0"
     },
     "extra": {
         "expose": [

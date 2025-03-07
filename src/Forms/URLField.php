@@ -1,6 +1,8 @@
 <?php
+
 namespace Axllent\FormFields\Forms;
 
+use SilverStripe\Core\Validation\ValidationResult;
 use SilverStripe\Forms\TextField;
 
 class URLField extends TextField
@@ -33,22 +35,21 @@ class URLField extends TextField
     /**
      * Return validation result
      *
-     * @param Validator $validator Validationr
-     *
      * @return bool
      */
-    public function validate($validator)
+    public function validate(): ValidationResult
     {
+        $result = ValidationResult::create();
         // Don't validate empty fields
         if (empty($this->value)) {
-            return true;
+            return $result;
         }
 
         if (!filter_var($this->value, FILTER_VALIDATE_URL)) {
-            if (filter_var('http://' . $this->value, FILTER_VALIDATE_URL)) {
-                $this->value = 'http://' . $this->value;
+            if (filter_var('https://' . $this->value, FILTER_VALIDATE_URL)) {
+                $this->value = 'https://' . $this->value;
             } else {
-                $validator->validationError(
+                $result->addFieldError(
                     $this->name,
                     _t(
                         __CLASS__ . '.ValidationError',
@@ -56,11 +57,9 @@ class URLField extends TextField
                     ),
                     'validation'
                 );
-
-                return false;
             }
         }
 
-        return true;
+        return $result;
     }
 }

@@ -3,6 +3,7 @@
 namespace Axllent\FormFields\Forms;
 
 use Axllent\FormFields\FieldType\PhoneNumber;
+use SilverStripe\Core\Validation\ValidationResult;
 use SilverStripe\Forms\TextField;
 
 class PhoneNumberField extends TextField
@@ -32,24 +33,22 @@ class PhoneNumberField extends TextField
 
     /**
      * Return validation result
-     *
-     * @param Validator $validator ValidationResult
-     *
-     * @return bool
      */
-    public function validate($validator)
+    public function validate(): ValidationResult
     {
+        $result = ValidationResult::create();
+
         // Don't validate empty fields
         $this->value = trim(strval($this->value));
 
         if (empty($this->value)) {
-            return true;
+            return $result;
         }
 
         $phone = PhoneNumber::create()->setValue($this->value);
 
         if (!$phone->Link()) {
-            $validator->validationError(
+            $result->addFieldError(
                 $this->name,
                 _t(
                     __CLASS__ . '.ValidationError',
@@ -57,10 +56,8 @@ class PhoneNumberField extends TextField
                 ),
                 'validation'
             );
-
-            return false;
         }
 
-        return true;
+        return $result;
     }
 }
