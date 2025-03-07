@@ -3,6 +3,11 @@
 Notable changes to this project will be documented in this file.
 
 
+## [2.0.0]
+
+- Support for Silverstripe 6
+
+
 ## [1.6.3]
 
 - Bugfix: remove unnecessary init()
