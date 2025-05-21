@@ -2,6 +2,10 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.6.4]
+
+- Add `referrerpolicy="strict-origin-when-cross-origin"` to VideoIframe template to account for CSP `referrer-policy: same-origin`
+
 
 ## [1.6.3]
 
